@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Cookbook</title>
+    <link rel="stylesheet" type="text/css" href="../static/easyui/themes/default/easyui.css" th:href="@{/easyui/themes/default/easyui.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/easyui/themes/icon.css" th:href="@{/easyui/themes/icon.css}"/>
+    <link rel="stylesheet" type="text/css" href="../static/easyui/demo/demo.css" th:href="@{/easyui/demo/demo.css}"/>
+    <script type="text/javascript" src="../static/easyui/jquery.min.js" th:src="@{/easyui/jquery-3.2.1.js}"></script>
+    <script type="text/javascript" src="../static/easyui/jquery.easyui.min.js" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+    <script type="text/javascript" src="../static/js/myui.js" th:src="@{/js/myui.js}"></script>
+</head>
+
+<body>
+    <table id="cookbook_dg" title="CookBook"></table>
+</body>
+<script language="javascript">
+    $(function () {
+        $("#cookbook_dg").mydg({
+            columns:[[
+                {
+                    field:'id',
+                    title:'ID',
+                    width:100,
+                    editor:'numberbox'
+                },
+                {
+                    field:'title',
+                    title:'TITLE',
+                    width:100,
+                    editor:'text'
+                },
+                {
+                    field:'author',
+                    title:'AUTHOR',
+                    width:100,
+                    editor:'text'
+                },
+                {
+                    field:'year',
+                    title:'YEAR',
+                    width:100,
+                    editor:'numberbox'
+                }
+            ]],
+            url:'/rest/cookbook/list',
+            insertUrl:'/rest/cookbook/insert'
+        })
+    })
+</script>
+
+</html>

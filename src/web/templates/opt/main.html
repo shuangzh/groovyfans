@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>DEMO - STUDENT MAIN PAGE</title>
+		<link rel="stylesheet" type="text/css" href="../static/easyui/themes/default/easyui.css" th:href="@{/easyui/themes/default/easyui.css}" />
+		<link rel="stylesheet" type="text/css" href="../static/easyui/themes/icon.css" th:href="@{/easyui/themes/icon.css}" />
+		<link rel="stylesheet" type="text/css" href="../static/easyui/demo/demo.css" th:href="@{/easyui/demo/demo.css}" />
+		<script type="text/javascript" src="../static/easyui/jquery.min.js" th:src="@{/easyui/jquery.min.js}"></script>
+		<script type="text/javascript" src="../static/easyui/jquery.easyui.min.js" th:src="@{/easyui/jquery.easyui.min.js}"></script>
+		<script type="text/javascript" src="../static/js/myui.js" th:src="@{/js/myui.js}"></script>
+	</head>
+
+	<body>
+		<div class="easyui-layout" style="width:auto;height:auto;" data-options="fit:true">
+			<div data-options="region:'north'" style="height:100px">
+				<h2>MAIN PAGE</h2>
+
+			</div>
+			<div data-options="region:'west',split:true,collapsible:false" title="Navigate" style="width:286px;">
+				<div>
+					<ul id="leftnav"></ul>
+				</div>
+			</div>
+			<div data-options="region:'center'">
+				<div id="maintabs" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+					<div title="About" style="padding:10px">
+						this is about page
+					</div>
+					<div title="DataGrid" style="padding:5px">
+						<table id="dg01">
+						</table>
+					</div>
+					<div title="Form" style="padding:5px">
+							<form id="form01" method="get">
+							</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script language="javascript">
+		$(function() {
+			// 设置左侧导航目录
+			var data = new Array()
+			// 第一级目录
+			data.push({
+				text: 'Corperations'
+			})
+			data[0].children = new Array()
+			data[0].children.push({
+				text: 'Info-Contracts'
+			})
+			data[0].children.push({
+				text: 'modify info'
+			})
+			var param = {
+				tabsid: 'maintabs',
+				data: data
+			}
+			$('#leftnav').mynavigate(param)
+
+			// 设置datagrid
+
+			param = {}
+			var columns = new Array()
+			columns.push({
+				field: 'id',
+				title: 'Product ID',
+				width: 80
+			})
+			columns.push({
+				field: 'name',
+				title: 'Product Name',
+				width: 100,
+				editor: 'text'
+			})
+			columns.push({
+				field: 'price',
+				title: 'Price',
+				width: 80,
+				editor: 'numberbox'
+			})
+			columns.push({
+				field: 'address',
+				title: 'Address',
+				width: 200,
+				editor: 'text'
+			})
+
+			$('#dg01').mydg({
+				fit: true,
+				columns: [columns]
+			})
+			dgdata = new Array()
+			dgdata.push({
+				id: 10001,
+				name: 'banana',
+				price: 1.5,
+				address: '广东'
+			})
+			dgdata.push({
+				id: 10002,
+				name: 'apple',
+				price: 2.5,
+				address: '河北'
+			})
+
+			$('#dg01').datagrid('loadData', dgdata)
+
+			// 设置form 
+			var fields = new Array()
+			width=150
+			fields.push({
+				label: 'Product ID',
+				name: 'id',
+				ui: 'textbox',
+				value: '10001',
+				width:300
+			})
+			fields.push({
+				label: 'Product Name',
+				name: 'name',
+				ui: 'textbox',
+				value: 'apple',
+				width:300
+			})
+
+			$('#form01').myform({
+				fields: fields,
+			})
+
+		})
+	</script>
+
+</html>

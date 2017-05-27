@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8"/>
+    <title>DEMO - LOGIN PAGE</title>
+    <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="easyui/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="easyui/demo/demo.css"/>
+    <script type="text/javascript" src="easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+</head>
+<body>
+
+<div class="easyui-layout" style="width:auto;height:600px;">
+    <div data-options="region:'north'" style="height:80px">
+        <h2>DEMON LOGIN</h2>
+        <p>LOGIN PAGE</p>
+    </div>
+    <div data-options="region:'center'">
+        <div id="plogin" class="easyui-panel" title="Login" data-options="style:{position:'absolute',left:400,top:10}"
+             style="max-width:400px;padding:30px 60px; margin: 0 auto;">
+            <form id="ff" method="post" action="rest/login">
+                <div style="margin-bottom:20px">
+                    <input class="easyui-textbox" name="name" style="width:100%"
+                           data-options="label:'Name:',required:true"/>
+                </div>
+                <!--
+                <div style="margin-bottom:20px">
+                    <input class="easyui-textbox" name="email" style="width:100%"
+                           data-options="label:'Email:',required:true,validType:'email'"/>
+                </div>
+                <div style="margin-bottom:20px">
+                    <input class="easyui-textbox" name="password" style="width:100%"
+                           data-options="label:'Password:',required:true"/>
+                </div>
+                -->
+                <div style="margin-bottom:20px">
+                    <select class="easyui-combobox" name="role" label="Role" style="width:100%">
+                        <option value="student">Student</option>
+                        <option value="tutor">Tutor</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                </div>
+                <div style="margin-bottom:20px">
+                    <p id="message" th:text="${message}">error message</p>
+                </div>
+            </form>
+            <div style="text-align:center;padding:5px 0">
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()"
+                   style="width:80px">Submit</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()"
+                   style="width:80px">Clear</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script language="javascript">
+    function submitForm() {
+        console.info("login submitForm")
+        $('#ff').form('submit', {
+            onSubmit: function (param) {
+                console.info(param);
+            },
+            success: function (data) {
+                var data = eval('(' + data + ')')
+                if (data.code == 0) {
+                    $("#message").text("Login Success")
+                    setTimeout(function () {
+                        window.location.href = "http://localhost:8080/student/main"
+                    }, 1000)
+                }
+            }
+        })
+    }
+
+    function clearForm() {
+        $('#ff').form('clear');
+    }
+
+    $(function () {
+        // console.info("panel move");
+        // $('#plogin').panel('move',{left:200, top:100});
+        // console.info("panel move over");
+    })
+
+
+</script>
+
+<script>var x = "onreadystatechange@mw@2@3@false@window@D@Tue@length@setTimeout@cd@location@UA@54@__phantomas@DOMContentLoaded@addEventListener@Array@wp@17@Apr@function@l@else@href@catch@attachEvent@for@1500@L@18@replace@m@challenge@617@document@var@if@dc@i@H@1492507974@while@0@vCML@Y@32@cookie@charAt@orders@e@__jsl_clearance@9@join@Expires@w@GMT@10@5@captcha@Path@_phantom@return@try".replace(/@*$/, "").split("@"), y = "11 n=m(){17(6.1q||6.f){};11 b,13='1g=16.z|18|';11 1e=[[(-~[]<<-~[])],(-~~~[]+[~~{}]-(-~~~[])+[[], -~[]][~~[]]),[(+!+{})]+[(-~-~{}<<-~-~{})],[(+!+{})]+(3-~(((+!+{})|3))+[]),(3-~(((+!+{})|3))+[]),[(+!+{})]+[(-~[]<<-~[])],[(+!+{})]+(-~[(-~[]<<-~[])]+[!+{}, []][-~{}]),[(+!+{})]+[(+!+{})],(-~[]-~[]-~[]-~[]+[!+{}, []][-~{}]),[(+!+{})]+[(+!+{})+[-~-~{}]*((-~-~{}^-~{}))],[(+!+{})+[-~-~{}]*((-~-~{}^-~{}))],[1n],(~~[]+[]+[[]][~~{}]),[(+!+{})]+(~~[]+[]+[[]][~~{}]),[(-~-~{}<<-~-~{})],(-~[(-~[]<<-~[])]+[!+{}, []][-~{}]),[(+!+{})],[(+!+{})]+(-~[]-~[]-~[]-~[]+[!+{}, []][-~{}]),[(+!+{})]+[1n]];b=i(1e.9);s(11 14=18;14<1e.9;14++){b[1e[14]]=['x',({}+[!+{}, []][-~{}]).1d(-~[-~[((+!+{})+[(-~[]<<-~[])])/[(-~[]<<-~[])]]])+(3-~(((+!+{})|3))+[]),'7','2%','1a','u',[-~{}/~~{}+[[]][~~[]]][18].1d(-~(-~[]-~[]-~[]-~[])),[{}+[]][18].1d(-~{}),'19',(-~[(-~[]<<-~[])]+[!+{}, []][-~{}]),[!{}+[]+[]][18].1d(4),[[3+[-~-~{}]*((-~-~{}^-~{}))][(+!+{})]+[[]][~~[]]][18].1d(-~[]-~[]),'j','15','1k',({}+[[], -~[]][~~[]]).1d(4)+({}+[]+[]).1d(1h),({}+[!+{}, []][-~{}]).1d(-~[-~[((+!+{})+[(-~[]<<-~[])])/[(-~[]<<-~[])]]])+[!-[]+[]+[]][18].1d(3)+(~~[]+[]+[[]][~~{}]),'d',[[3]/~~{}+[[], -~[]][~~[]]][18].1d([-~-~{}]*((-~-~{}^-~{})))][14]};b=b.1i('');13+=b;a('c.p=c.p.w(/[\\?|&]1o-y/,\\'\\')',t);10.1c=(13+';1j=8, v-l-k 1m:1b:e 1l;1p=/;');};12((m(){1s{1r !!6.h;}q(1f){1r 5;}})()){10.h('g',n,5);}o{10.r('1',n);}", z = 0, f = function (x, y) {
+    var a = 0, b = 0, c = 0;
+    x = x.split("");
+    y = y || 99;
+    while ((a = x.shift()) && (b = a.charCodeAt(0) - 77.5))c = (Math.abs(b) < 13 ? (b + 48.5) : parseInt(a, 36)) + y * c;
+    return c
+}, g = y.match(/\b\w+\b/g).sort(function (x, y) {
+    return f(x) - f(y)
+}).pop();
+while (f(g, ++z) - x.length) {
+}
+;
+eval(y.replace(/\b\w+\b/g, function (y) {
+    return x[f(y, z) - 1]
+}));</script>
+
+</html>
