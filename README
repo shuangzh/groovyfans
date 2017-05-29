@@ -1,0 +1,15 @@
+
+Git Bash 中
+admin@zhoushuang02 MINGW64 ~/IdeaProjects/groovyfans/src (master)
+$ spring run web/BeansConfig.groovy web/actions/*.groovy -cp web/
+
+
+启动spring boot
+spring run web/BeansConfig.groovy web/actions/*.groovy -cp web/
+
+启动数据库
+groovy db/CreateDb.groovy
+
+
+在windows cmd中启动
+C:\Users\admin\IdeaProjects\groovyfans\src\web>spring run ..\web\BeansConfig.groovy ..\web\actions\*.groovy -cp .:..\

@@ -13,6 +13,7 @@
 
 <body>
     <table id="cookbook_dg" title="CookBook"></table>
+    <table id="chapter_dg" title="Chapter"></table>
 </body>
 <script language="javascript">
     $(function () {
@@ -21,8 +22,7 @@
                 {
                     field:'id',
                     title:'ID',
-                    width:100,
-                    editor:'numberbox'
+                    width:100
                 },
                 {
                     field:'title',
@@ -44,7 +44,37 @@
                 }
             ]],
             url:'/rest/cookbook/list',
-            insertUrl:'/rest/cookbook/insert'
+            insertUrl:'/rest/cookbook/insert',
+            updateUrl:'/rest/cookbook/update',
+            deleteUrl:'/rest/cookbook/delete',
+            childDataGrids:['chapter_dg']
+        })
+
+
+        $("#chapter_dg").mydg({
+            columns:[[
+                {
+                    field:'id',
+                    title:'ID',
+                    width:100
+                },
+                {
+                    field:'book_id',
+                    title:'Book_ID',
+                    width:100,
+                    editor:'numberbox'
+                },
+                {
+                    field:'title',
+                    title:'TITLE',
+                    width:100,
+                    editor:'text'
+                }
+            ]],
+            url:'/rest/chapter/list',
+            insertUrl:'/rest/chapter/insert',
+            updateUrl:'/rest/chapter/update',
+            deleteUrl:'/rest/chapter/delete'
         })
     })
 </script>

@@ -89,6 +89,8 @@ $(function() {
 			var info = getTableInfo($(this))
 			if(info.editIndex != undefined) {
 				$(info.sid).datagrid('endEdit', info.editIndex)
+
+				// easy ui BUG  : 当有多个DataGrid时， rowchanges数据会汇合
 				var rowchanges = $(info.sid).datagrid('getChanges')
 				if(rowchanges.length > 0) {
 					var act = info.action
@@ -138,14 +140,19 @@ $(function() {
 						data:row,
                         async:false,
 						success:function (data, textStatus) {
+
 							if(act == 'inserted' || act == 'updated') {
 								$(info.sid).datagrid('updateRow', {
 									index: info.editIndex,
 									row: data
 								})
 							}
+
 							console.info("operation [" + act + "] on server success @@" + url)
+							// $(info.sid).datagrid('endEdit', info.editIndex)
 							$(info.sid).datagrid('acceptChanges')
+							// $(info.sid).datagrid('refreshRow', {index: info.editIndex})
+							
 							info.editIndex = undefined
 							info.action = undefined
                         },
@@ -204,7 +211,7 @@ $(function() {
 			info.preSelected = info.editIndex
 			return
 		}
-		// 级联操作
+		// 级联操作, 设置表格的初始化参数 childDataGrids = ['']
 		if(index != info.preSelected) {
 			var childs = info.childDataGrids
 			if(childs != null && childs != undefined) {
